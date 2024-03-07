@@ -1,18 +1,24 @@
 import 'package:capstone/src/views/homeScreen/HomeScreen.dart';
+import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:capstone/src/views/profileScreen/ProfileScreen.dart';
 import 'package:capstone/src/views/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: LoginScreen(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == HomeScreen.routeName) {
             return MaterialPageRoute(builder: (context) => HomeScreen());
