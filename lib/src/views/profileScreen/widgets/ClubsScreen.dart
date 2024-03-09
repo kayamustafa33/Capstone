@@ -1,3 +1,4 @@
+import 'package:capstone/src/views/profileScreen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ClubsScreen extends StatelessWidget {
@@ -10,8 +11,16 @@ class ClubsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Clubs"),
       ),
-      body: const Center(
-        child: Text("Clubs"),
+      body: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          itemCount: 8,
+          itemBuilder: (context,index) {
+            return clubsWidget(context);
+          }
       ),
     );
   }
