@@ -31,10 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast: ^8.2.4
-  firebase_core: ^2.26.0
-  firebase_auth: ^4.17.7
-  cloud_firestore: ^4.15.7
-  firebase_database: ^10.4.8
   equatable: ^2.0.5
 
 
@@ -67,7 +63,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/archer.jpeg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,5 +1,6 @@
 import 'package:capstone/main.dart';
 import 'package:capstone/src/util/util.dart';
+import 'package:capstone/src/views/watchLiveScreen/WatchLiveScreen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: () {
                 // Watch Live operations
-                showToast("Watch Live");
+                _watchLive();
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
@@ -102,6 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       showToast('User Id or Password cannot be left blank!');
     }
+  }
+
+  void _watchLive() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const WatchLiveScreen()),
+    );
   }
 }
 
