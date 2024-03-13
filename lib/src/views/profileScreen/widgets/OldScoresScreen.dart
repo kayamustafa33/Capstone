@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class OldScoresScreen extends StatelessWidget{
+class OldScoresScreen extends StatelessWidget {
   const OldScoresScreen({super.key});
+  static const String routeName = "/profileOldScores";
 
   @override
   Widget build(BuildContext context) {

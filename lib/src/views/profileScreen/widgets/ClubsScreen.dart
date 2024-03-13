@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ClubsScreen extends StatelessWidget{
+class ClubsScreen extends StatelessWidget {
   const ClubsScreen({super.key});
+  static const String routeName = "/profileClubs";
 
   @override
   Widget build(BuildContext context) {
