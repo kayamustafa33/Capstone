@@ -31,6 +31,7 @@ class ProfileScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(20),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: double.infinity,
