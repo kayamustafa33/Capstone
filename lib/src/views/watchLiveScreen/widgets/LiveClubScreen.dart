@@ -1,14 +1,16 @@
-import 'package:capstone/src/views/profileScreen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class ClubsScreen extends StatelessWidget {
-  const ClubsScreen({super.key});
-  static const String routeName = "/profileClubs";
+import '../../profileScreen/widgets/widgets.dart';
+
+class LiveClubScreen extends StatelessWidget {
+  const LiveClubScreen({super.key});
+  static const String routeName = "/liveClubScreen";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text("Clubs"),
       ),
       body: GridView.builder(
