@@ -9,7 +9,10 @@ class LiveScoresScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Live Scores"),
+        title: const Text("Canlı Skorlar",style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
+        elevation: 2.0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Center(
         child: Padding(

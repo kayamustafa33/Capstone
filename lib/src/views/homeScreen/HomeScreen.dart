@@ -14,7 +14,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Hoşgeldin Okçu"),
+        title: const Text("Hoşgeldin Okçu",style: TextStyle(color: Colors.white),),
+        elevation: 2.0,
+        backgroundColor: Colors.blue,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 10.0),

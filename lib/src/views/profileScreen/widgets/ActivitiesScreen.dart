@@ -10,7 +10,10 @@ class ActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Activities"),
+        title: const Text("Activities",style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
+        elevation: 2.0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 50.0),
