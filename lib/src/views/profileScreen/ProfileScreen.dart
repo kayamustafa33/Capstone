@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: 10),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text("User Info")],
+                children: [Text("Kullanıcı adı")],
               ),
               const SizedBox(height: 10),
               Container(
@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          'Old Scores',
+                          'Eski Skorlar',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -69,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          'Clubs',
+                          'Kulüpler',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -85,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          'Activities',
+                          'Aktiviteler',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),

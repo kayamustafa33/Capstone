@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'CustomBottomSheet.dart';
 
 class ScoreTableCell extends StatelessWidget {
   final String text;
+  final VoidCallback? onTap;
 
-  const ScoreTableCell({super.key, required this.text});
+  const ScoreTableCell({super.key, required this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      alignment: Alignment.center,
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 16.0),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 16.0),
+        ),
       ),
     );
   }
@@ -34,7 +39,12 @@ class ScoreTable extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Table(
-          border: TableBorder.all(),
+          border: const TableBorder(
+            horizontalInside: BorderSide(width: 1, color: Colors.black),
+            verticalInside: BorderSide(width: 1, color: Colors.black),
+            left: BorderSide.none,
+            right: BorderSide.none,
+          ),
           columnWidths: const <int, TableColumnWidth>{
             0: FlexColumnWidth(),
             1: FlexColumnWidth(),
@@ -50,7 +60,9 @@ class ScoreTable extends StatelessWidget {
               children: <Widget>[
                 const ScoreTableCell(text: ""),
                 for (int i = 0; i < 6; i++)
-                  ScoreTableCell(text: "Atış ${i + 1}"),
+                  ScoreTableCell(
+                    text: "Atış ${i + 1}",
+                  ),
                 const ScoreTableCell(text: "Toplam"),
               ],
             ),
@@ -59,9 +71,15 @@ class ScoreTable extends StatelessWidget {
                 children: <Widget>[
                   ScoreTableCell(text: "Set ${i + 1}"),
                   for (int j = 0; j < 6; j++)
-                    ScoreTableCell(text: "${allScores[i][j]}"),
+                    ScoreTableCell(
+                      text: "${allScores[i][j]}",
+                      onTap: () {
+                        _showBottomSheet(context);
+                      },
+                    ),
                   ScoreTableCell(
-                      text: "${allScores[i].reduce((value, element) => value + element)}"),
+                    text: "${allScores[i].reduce((value, element) => value + element)}",
+                  ),
                 ],
               ),
             TableRow(
@@ -70,7 +88,8 @@ class ScoreTable extends StatelessWidget {
                 for (int j = 0; j < 6; j++)
                   const ScoreTableCell(text: ""),
                 ScoreTableCell(
-                    text: "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}"),
+                  text: "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",
+                ),
               ],
             ),
           ],
@@ -78,4 +97,17 @@ class ScoreTable extends StatelessWidget {
       ),
     );
   }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return const AddScoreBottomSheet();
+      },
+    );
+  }
 }
+
+
+

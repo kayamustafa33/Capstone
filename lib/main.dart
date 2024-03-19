@@ -1,5 +1,4 @@
 import 'package:capstone/src/views/homeScreen/HomeScreen.dart';
-import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:capstone/src/views/profileScreen/ProfileScreen.dart';
 import 'package:capstone/src/views/splashScreen/SplashScreen.dart';
 import 'package:capstone/src/views/widgets/bottomNavBar.dart';
@@ -28,7 +27,7 @@ class MainApp extends StatelessWidget {
           }
           return null;
         },
-        home: MainScreen());
+        home: const MainScreen());
   }
 }
 
