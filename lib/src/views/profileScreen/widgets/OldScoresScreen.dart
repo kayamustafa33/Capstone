@@ -9,7 +9,7 @@ class OldScoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Old Scores",style: TextStyle(color: Colors.white)),
+        title: const Text("Eski Skorlar",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         elevation: 2.0,
         iconTheme: const IconThemeData(color: Colors.white),

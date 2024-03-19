@@ -9,7 +9,7 @@ class ClubsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Clubs",style: TextStyle(color: Colors.white)),
+        title: const Text("Kulüpler",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         elevation: 2.0,
         iconTheme: const IconThemeData(color: Colors.white),

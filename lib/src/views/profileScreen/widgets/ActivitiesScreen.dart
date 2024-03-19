@@ -10,7 +10,7 @@ class ActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Activities",style: TextStyle(color: Colors.white)),
+        title: const Text("Aktiviteler",style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         elevation: 2.0,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -20,7 +20,7 @@ class ActivitiesScreen extends StatelessWidget {
         child: Column(
           children: [
             const Text(
-                "Activities",
+                "Aktiviteler",
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold
