@@ -39,7 +39,8 @@ class LiveScoresScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildCategories(),
+                  _buildGenderGroups("Erkek"),
+                  _buildGenderGroups("Kız"),
                 ],
               ),
             ),
@@ -47,23 +48,14 @@ class LiveScoresScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildCategories(),
+                  _buildGenderGroups("Erkek"),
+                  _buildGenderGroups("Kız"),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildCategories() {
-    return ExpansionTile(
-      title: const Text('Cinsiyet Seçiniz'),
-      children: [
-        _buildGenderGroups("Erkek"),
-        _buildGenderGroups("Kız"),
-      ],
     );
   }
 
