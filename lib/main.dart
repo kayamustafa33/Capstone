@@ -1,3 +1,4 @@
+import 'package:capstone/src/views/ScoresScreen/ScoresScreen.dart';
 import 'package:capstone/src/views/homeScreen/HomeScreen.dart';
 import 'package:capstone/src/views/profileScreen/ProfileScreen.dart';
 import 'package:capstone/src/views/splashScreen/SplashScreen.dart';
@@ -24,6 +25,8 @@ class MainApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => HomeScreen());
           } else if (settings.name == ProfileScreen.routeName) {
             return MaterialPageRoute(builder: (context) => ProfileScreen());
+          }else if (settings.name == ScoresScreen.routeName){
+            return MaterialPageRoute(builder: (context) => ScoresScreen());
           }
           return null;
         },
@@ -43,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     const HomeScreen(),
+    const ScoresScreen(),
     const ProfileScreen(),
   ];
 
