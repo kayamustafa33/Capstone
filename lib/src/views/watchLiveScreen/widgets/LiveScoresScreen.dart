@@ -111,16 +111,21 @@ class _LiveScoreScreenState extends State<LiveScoresScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          buildAgeGroup(gender, "+15", [
-            ['Player 1', '100'],
-            ['Player 2', '85'],
-            ['Player 3', '70']
-          ]),
-          buildAgeGroup(gender, "+13", [
-            ['Player 4', '95'],
-            ['Player 5', '80'],
-            ['Player 6', '65']
-          ]),
+          Column(
+            children: [
+              buildAgeGroup(gender, "+15", [
+                ['Player 1', '100'],
+                ['Player 2', '85'],
+                ['Player 3', '70']
+              ]),
+              buildAgeGroup(gender, "+13", [
+                ['Player 4', '95'],
+                ['Player 5', '80'],
+                ['Player 6', '65']
+              ]),
+            ],
+          ),
+
         ],
       ),
     );
