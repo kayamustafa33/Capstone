@@ -22,11 +22,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == HomeScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => HomeScreen());
+            return MaterialPageRoute(builder: (context) => const HomeScreen());
           } else if (settings.name == ProfileScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => ProfileScreen());
+            return MaterialPageRoute(builder: (context) => const ProfileScreen());
           }else if (settings.name == ScoresScreen.routeName){
-            return MaterialPageRoute(builder: (context) => ScoresScreen());
+            return MaterialPageRoute(builder: (context) => const ScoresScreen());
           }
           return null;
         },

@@ -1,3 +1,4 @@
+import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:capstone/src/views/profileScreen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -86,6 +87,21 @@ class ProfileScreen extends StatelessWidget {
                         },
                         child: const Text(
                           'Aktiviteler',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          );
+                        },
+                        child: const Text(
+                          'Çıkış Yap',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),

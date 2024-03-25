@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  static const String routeName = "/loginScreen";
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -25,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: 60.0),
             Image.asset(
-              'assets/archer.jpeg',
+              'assets/logo.jpg',
               height: 200,
               fit: BoxFit.contain,
             ),
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               ),
               child: const Text(
-                'Login',
+                'Giriş Yap',
                 style: TextStyle(
                     color: Colors.white
                 ),
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
               ),
               child: const Text(
-                'Watch Live',
+                'Canlı İzle',
                 style: TextStyle(
                   color: Colors.white
                 ),
