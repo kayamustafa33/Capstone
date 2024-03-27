@@ -125,7 +125,6 @@ class _LiveScoreScreenState extends State<LiveScoresScreen> {
               ]),
             ],
           ),
-
         ],
       ),
     );

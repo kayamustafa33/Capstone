@@ -4,29 +4,40 @@ import 'CustomBottomSheet.dart';
 class ScoreTableCell extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
-
-  const ScoreTableCell({super.key, required this.text, this.onTap});
+  final bool? isDetector;
+  const ScoreTableCell({super.key, required this.text, this.onTap, required this.isDetector});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
+    if(isDetector == true){
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16.0),
+          ),
+        ),
+      );
+    } else {
+      return Container(
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.center,
         child: Text(
           text,
           style: const TextStyle(fontSize: 16.0),
         ),
-      ),
-    );
+      );
+    }
   }
 }
 
 class ScoreTable extends StatelessWidget {
   final List<List<int>> allScores;
-
-  const ScoreTable({super.key, required this.allScores});
+  final bool? isDetector;
+  const ScoreTable({super.key, required this.allScores, required this.isDetector});
 
   @override
   Widget build(BuildContext context) {
@@ -58,37 +69,37 @@ class ScoreTable extends StatelessWidget {
           children: <TableRow>[
             TableRow(
               children: <Widget>[
-                const ScoreTableCell(text: ""),
+                ScoreTableCell(text: "", isDetector: isDetector),
                 for (int i = 0; i < 6; i++)
                   ScoreTableCell(
-                    text: "Atış ${i + 1}",
+                    text: "Atış ${i + 1}",isDetector: isDetector
                   ),
-                const ScoreTableCell(text: "Toplam"),
+                ScoreTableCell(text: "Toplam",isDetector: isDetector),
               ],
             ),
             for (int i = 0; i < allScores.length; i++)
               TableRow(
                 children: <Widget>[
-                  ScoreTableCell(text: "Set ${i + 1}"),
+                  ScoreTableCell(text: "Set ${i + 1}",isDetector: isDetector),
                   for (int j = 0; j < 6; j++)
                     ScoreTableCell(
-                      text: "${allScores[i][j]}",
+                      text: "${allScores[i][j]}",isDetector: isDetector,
                       onTap: () {
                         _showBottomSheet(context);
                       },
                     ),
                   ScoreTableCell(
-                    text: "${allScores[i].reduce((value, element) => value + element)}",
+                    text: "${allScores[i].reduce((value, element) => value + element)}",isDetector: isDetector
                   ),
                 ],
               ),
             TableRow(
               children: <Widget>[
-                const ScoreTableCell(text: "Toplam"),
+                ScoreTableCell(text: "Toplam",isDetector: isDetector),
                 for (int j = 0; j < 6; j++)
-                  const ScoreTableCell(text: ""),
+                  ScoreTableCell(text: "",isDetector: isDetector),
                 ScoreTableCell(
-                  text: "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",
+                  text: "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",isDetector: isDetector
                 ),
               ],
             ),

@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
               decoration: InputDecoration(
-                labelText: 'User ID',
+                labelText: 'Kullanıcı adı',
                 hintText: '123456',
                 prefixIcon: const Icon(Icons.person),
                 border: OutlineInputBorder(
@@ -133,7 +133,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       onChanged: widget.onChanged,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: 'Şifre',
         hintText: '123456',
         prefixIcon: const Icon(Icons.lock),
         suffixIcon: IconButton(

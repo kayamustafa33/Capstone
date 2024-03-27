@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
                       [2, 5, 6, 4, 8, 6],
                       [3, 6, 7, 5, 9, 7]
                     ],
+                    isDetector: true,
                   ),
                   SizedBox(height: 10),
                 ],

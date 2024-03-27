@@ -70,7 +70,7 @@ class LiveScoreTable extends StatelessWidget {
                   [3, 6, 7, 5, 9, 7],
                   [2, 5, 6, 4, 8, 6],
                   [3, 6, 7, 5, 9, 7]
-                ]),
+                ], isDetector: false),
               ],
             ),
           ),
