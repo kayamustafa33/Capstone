@@ -34,7 +34,8 @@ class ActivitiesScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const UpcomingEventScreen()),
+                        builder: (context) => const UpcomingEventScreen()
+                    ),
                   );
                 },
                 child: const Text(
