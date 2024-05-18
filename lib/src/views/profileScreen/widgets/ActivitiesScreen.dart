@@ -10,14 +10,17 @@ class ActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Activities"),
+        title: const Text("Aktiviteler",style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
+        elevation: 2.0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 50.0),
         child: Column(
           children: [
             const Text(
-                "Activities",
+                "Aktiviteler",
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold
@@ -31,7 +34,8 @@ class ActivitiesScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const UpcomingEventScreen()),
+                        builder: (context) => const UpcomingEventScreen()
+                    ),
                   );
                 },
                 child: const Text(

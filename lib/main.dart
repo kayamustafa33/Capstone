@@ -1,13 +1,14 @@
+import 'package:capstone/src/views/ScoresScreen/ScoresScreen.dart';
 import 'package:capstone/src/views/homeScreen/HomeScreen.dart';
-import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:capstone/src/views/profileScreen/ProfileScreen.dart';
+import 'package:capstone/src/views/splashScreen/SplashScreen.dart';
 import 'package:capstone/src/views/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: LoginScreen(),
+    home: SplashScreen(),
   ));
 }
 
@@ -21,13 +22,15 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == HomeScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => HomeScreen());
+            return MaterialPageRoute(builder: (context) => const HomeScreen());
           } else if (settings.name == ProfileScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => ProfileScreen());
+            return MaterialPageRoute(builder: (context) => const ProfileScreen());
+          }else if (settings.name == ScoresScreen.routeName){
+            return MaterialPageRoute(builder: (context) => const ScoresScreen());
           }
           return null;
         },
-        home: MainScreen());
+        home: const MainScreen());
   }
 }
 
@@ -43,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     const HomeScreen(),
+    const ScoresScreen(),
     const ProfileScreen(),
   ];
 

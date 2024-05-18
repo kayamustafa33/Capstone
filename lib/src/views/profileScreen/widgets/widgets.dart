@@ -20,7 +20,7 @@ Widget oldScoresWidget(BuildContext context){
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Old Scores"),
+          Text("Eski Skorlar"),
         ],
       ),
     ),
@@ -42,7 +42,7 @@ Widget clubsWidget(BuildContext context){
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Clubs"),
+          Text("Kulüpler"),
         ],
       ),
     ),

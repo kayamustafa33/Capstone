@@ -1,24 +1,64 @@
-import 'package:capstone/src/views/homeScreen/widgets/CustomBottomSheet.dart';
 import 'package:capstone/src/views/homeScreen/widgets/ScoreTable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
   static const String routeName = "/homeScreen";
+
   @override
   Widget build(BuildContext context) {
+    String archerName = "Mustafa";
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Welcome Archer"),
+        title: Text("Hoşgeldin $archerName",style: const TextStyle(color: Colors.white),),
+        elevation: 2.0,
+        backgroundColor: Colors.blue,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/target.png'),
+              backgroundColor: Colors.transparent,
+            ),
+          ),
+        ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [Expanded(child: ScoreTable()), AddScoreBottomSheet()],
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: ListView(
+                children: const [
+                  ScoreTable(
+                    allScores: [
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7],
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7],
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7],
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7],
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7],
+                      [2, 5, 6, 4, 8, 6],
+                      [3, 6, 7, 5, 9, 7]
+                    ],
+                    isDetector: true,
+                  ),
+                  SizedBox(height: 10),
+                ],
+              ),
+            ),
+            //const AddScoreBottomSheet(),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }

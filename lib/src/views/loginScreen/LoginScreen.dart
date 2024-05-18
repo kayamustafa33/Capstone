@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  static const String routeName = "/loginScreen";
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -25,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: 60.0),
             Image.asset(
-              'assets/archer.jpeg',
+              'assets/logo.jpg',
               height: 200,
               fit: BoxFit.contain,
             ),
@@ -37,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
               decoration: InputDecoration(
-                labelText: 'User ID',
+                labelText: 'Kullanıcı adı',
                 hintText: '123456',
                 prefixIcon: const Icon(Icons.person),
                 border: OutlineInputBorder(
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
               ),
               child: const Text(
-                'Login',
+                'Giriş Yap',
                 style: TextStyle(
                     color: Colors.white
                 ),
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
               ),
               child: const Text(
-                'Watch Live',
+                'Canlı İzle',
                 style: TextStyle(
                   color: Colors.white
                 ),
@@ -131,7 +133,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       onChanged: widget.onChanged,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: 'Şifre',
         hintText: '123456',
         prefixIcon: const Icon(Icons.lock),
         suffixIcon: IconButton(

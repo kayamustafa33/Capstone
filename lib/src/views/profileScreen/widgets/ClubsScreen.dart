@@ -9,7 +9,10 @@ class ClubsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Clubs"),
+        title: const Text("Kulüpler",style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
+        elevation: 2.0,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
