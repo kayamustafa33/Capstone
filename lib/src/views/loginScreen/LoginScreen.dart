@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../blocks/Auth/auth_bloc.dart';
 import '../homeScreen/HomeScreen.dart';
+import '../watchLiveScreen/WatchLiveScreen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -120,6 +122,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   );
                 },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WatchLiveScreen(),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+                child: const Text(
+                  'Watch Live',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

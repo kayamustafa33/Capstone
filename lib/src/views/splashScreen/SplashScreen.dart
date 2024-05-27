@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:flutter/material.dart';
+
+import '../loginScreen/LoginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,12 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 1.0;
       });
     });
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 3), () {
       setState(() {
         _opacity = 0.0;
       });
@@ -47,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/final_logo.jpg'),
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
