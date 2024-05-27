@@ -1,19 +1,23 @@
+import 'package:capstone/src/models/User.dart';
 import 'package:capstone/src/views/homeScreen/widgets/ScoreTable.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final User user;
+
+  const HomeScreen({required this.user, super.key});
 
   static const String routeName = "/homeScreen";
 
   @override
   Widget build(BuildContext context) {
-    String archerName = "Mustafa";
+    String archerName = user.name.split(' ')[0];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Hoşgeldin $archerName",style: const TextStyle(color: Colors.white),),
+        title: Text("Hoşgeldin $archerName",
+            style: const TextStyle(color: Colors.white)),
         elevation: 2.0,
         backgroundColor: Colors.blue,
         actions: const [
