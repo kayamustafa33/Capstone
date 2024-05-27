@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter MySQL Login',
+        title: 'Archery app',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
