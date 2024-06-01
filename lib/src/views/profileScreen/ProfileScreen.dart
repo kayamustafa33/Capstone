@@ -1,6 +1,7 @@
-import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
 import 'package:capstone/src/views/profileScreen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import '../loginScreen/LoginScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,7 +16,8 @@ class ProfileScreen extends StatelessWidget {
           Column(
             children: [
               AppBar(
-                title: const Text('Profil',style: TextStyle(color: Colors.white)),
+                title:
+                    const Text('Profil', style: TextStyle(color: Colors.white)),
                 elevation: 2.0,
                 centerTitle: true,
                 backgroundColor: Colors.blue,
@@ -97,7 +99,8 @@ class ProfileScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: const Text(
