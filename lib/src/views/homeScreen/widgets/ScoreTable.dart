@@ -5,11 +5,12 @@ class ScoreTableCell extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final bool? isDetector;
-  const ScoreTableCell({super.key, required this.text, this.onTap, required this.isDetector});
+  const ScoreTableCell(
+      {super.key, required this.text, this.onTap, required this.isDetector});
 
   @override
   Widget build(BuildContext context) {
-    if(isDetector == true){
+    if (isDetector == true) {
       return GestureDetector(
         onTap: onTap,
         child: Container(
@@ -37,7 +38,11 @@ class ScoreTableCell extends StatelessWidget {
 class ScoreTable extends StatelessWidget {
   final List<List<int>> allScores;
   final bool? isDetector;
-  const ScoreTable({super.key, required this.allScores, required this.isDetector});
+  const ScoreTable(
+      {super.key,
+      required this.allScores,
+      required this.isDetector,
+      required Null Function(dynamic set, dynamic arrow) onCellTap});
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +76,37 @@ class ScoreTable extends StatelessWidget {
               children: <Widget>[
                 ScoreTableCell(text: "", isDetector: isDetector),
                 for (int i = 0; i < 6; i++)
-                  ScoreTableCell(
-                    text: "Atış ${i + 1}",isDetector: isDetector
-                  ),
-                ScoreTableCell(text: "Toplam",isDetector: isDetector),
+                  ScoreTableCell(text: "Atış ${i + 1}", isDetector: isDetector),
+                ScoreTableCell(text: "Toplam", isDetector: isDetector),
               ],
             ),
             for (int i = 0; i < allScores.length; i++)
               TableRow(
                 children: <Widget>[
-                  ScoreTableCell(text: "Set ${i + 1}",isDetector: isDetector),
+                  ScoreTableCell(text: "Set ${i + 1}", isDetector: isDetector),
                   for (int j = 0; j < 6; j++)
                     ScoreTableCell(
-                      text: "${allScores[i][j]}",isDetector: isDetector,
+                      text: "${allScores[i][j]}",
+                      isDetector: isDetector,
                       onTap: () {
                         _showBottomSheet(context);
                       },
                     ),
                   ScoreTableCell(
-                    text: "${allScores[i].reduce((value, element) => value + element)}",isDetector: isDetector
-                  ),
+                      text:
+                          "${allScores[i].reduce((value, element) => value + element)}",
+                      isDetector: isDetector),
                 ],
               ),
             TableRow(
               children: <Widget>[
-                ScoreTableCell(text: "Toplam",isDetector: isDetector),
+                ScoreTableCell(text: "Toplam", isDetector: isDetector),
                 for (int j = 0; j < 6; j++)
-                  ScoreTableCell(text: "",isDetector: isDetector),
+                  ScoreTableCell(text: "", isDetector: isDetector),
                 ScoreTableCell(
-                  text: "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",isDetector: isDetector
-                ),
+                    text:
+                        "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",
+                    isDetector: isDetector),
               ],
             ),
           ],
@@ -114,11 +120,9 @@ class ScoreTable extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return const AddScoreBottomSheet();
+        // return const AddScoreBottomSheet();
+        return SizedBox();
       },
     );
   }
 }
-
-
-

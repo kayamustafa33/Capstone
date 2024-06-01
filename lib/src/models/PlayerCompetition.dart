@@ -13,4 +13,9 @@ class PlayerCompetition {
       required this.competitionId,
       required this.arrowCount,
       required this.score});
+
+  @override
+  String toString() {
+    return 'PlayerCompetition(playerCompId: $playerCompId, set: $set, playerId: $playerId, competitionId: $competitionId, arrowCount: $arrowCount, score: $score)';
+  }
 }

@@ -16,12 +16,25 @@ class DatabaseService {
     password: 'Tmcg35u4p5',
     db: 'sql6706133',
   );
+  // final settings = ConnectionSettings(
+  //   host: '10.0.2.2',
+  //   port: 3306,
+  //   user: 'root',
+  //   password: 'Asdfqwer',
+  //   db: 'archery_db',
+  // );
 
   MySqlConnection? _connection;
 
   Future<MySqlConnection> get connection async {
     if (_connection == null) {
-      _connection = await MySqlConnection.connect(settings);
+      try {
+        _connection = await MySqlConnection.connect(settings);
+        print('Connected to MySQL');
+      } catch (e) {
+        print('Error connecting to MySQL: $e');
+        rethrow;
+      }
     }
     return _connection!;
   }

@@ -35,7 +35,6 @@ Widget customBottomNavBar(Function onTabTapped, int currentIndex) {
 }
 
 Widget customWatchLiveBottomNav(Function onTabTapped, int currentIndex) {
-
   List<BottomNavigationBarItem> bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Image.asset('assets/star.png'),
@@ -54,15 +53,14 @@ Widget customWatchLiveBottomNav(Function onTabTapped, int currentIndex) {
       color: Colors.blue,
     ),
     child: BottomNavigationBar(
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      onTap: (value) {
-        onTabTapped(value);
-      },
-      currentIndex: currentIndex,
-      items: bottomNavBarItems
-    ),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        onTap: (value) {
+          onTabTapped(value);
+        },
+        currentIndex: currentIndex,
+        items: bottomNavBarItems),
   );
 }

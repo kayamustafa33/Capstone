@@ -4,6 +4,8 @@ import 'package:capstone/src/views/watchLiveScreen/WatchLiveScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocks/Auth/auth_bloc.dart';
+import '../homeScreen/HomeScreen.dart';
+import '../../models/User.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -45,6 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _emailController.text = "Güney_Albayrak@gmail.com";
+    _passwordController.text = "000";
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -62,8 +67,12 @@ class _LoginScreenState extends State<LoginScreen> {
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthSuccess) {
-                  // Navigate to home screen or another screen
-                  Navigator.pushReplacementNamed(context, '/homeScreen');
+                  // Navigate to main screen with user data
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainScreen(user: state.user)),
+                  );
                 } else if (state is AuthFailure) {
                   // Show error message
                   ScaffoldMessenger.of(context).showSnackBar(

@@ -21,7 +21,6 @@ class LiveScoreTableCell extends StatelessWidget {
   }
 }
 
-
 class LiveScoreTable extends StatelessWidget {
   final List<List<String>> liveScores;
 
@@ -42,7 +41,7 @@ class LiveScoreTable extends StatelessWidget {
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: [
           for (int i = 0; i < liveScores.length; i++)
-            _buildTableRow(i,context),
+            _buildTableRow(i, context),
         ],
       ),
     );
@@ -56,21 +55,25 @@ class LiveScoreTable extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: ListView(
-              children: const [
-                ScoreTable(allScores: [
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7],
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7],
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7],
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7],
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7],
-                  [2, 5, 6, 4, 8, 6],
-                  [3, 6, 7, 5, 9, 7]
-                ], isDetector: false),
+              children: [
+                ScoreTable(
+                  allScores: [
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7],
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7],
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7],
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7],
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7],
+                    [2, 5, 6, 4, 8, 6],
+                    [3, 6, 7, 5, 9, 7]
+                  ],
+                  isDetector: false,
+                  onCellTap: (set, arrow) {},
+                ),
               ],
             ),
           ),
@@ -78,7 +81,6 @@ class LiveScoreTable extends StatelessWidget {
       },
     );
   }
-
 
   TableRow _buildTableRow(int rowIndex, BuildContext context) {
     return TableRow(
@@ -95,9 +97,4 @@ class LiveScoreTable extends StatelessWidget {
       ],
     );
   }
-
-
 }
-
-
-

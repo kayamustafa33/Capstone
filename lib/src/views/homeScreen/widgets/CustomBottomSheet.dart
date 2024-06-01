@@ -1,9 +1,13 @@
-import 'package:capstone/src/util/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../util/textStyles.dart';
 
 class AddScoreBottomSheet extends StatelessWidget {
-  const AddScoreBottomSheet({super.key});
+  final TextEditingController scoreController;
+  final VoidCallback onSubmit;
+
+  const AddScoreBottomSheet(
+      {super.key, required this.scoreController, required this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: TextField(
+                    controller: scoreController,
                     decoration: InputDecoration(
                       labelText: "Skor ekle",
                       border: OutlineInputBorder(
@@ -32,7 +37,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.digitsOnly,
                     ], // Only numbers can be entered
                   ),
                 ),
@@ -50,9 +55,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                         "Ekle",
                         style: buttonNameStyle,
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: onSubmit,
                     ),
                   ),
                 ),
@@ -64,4 +67,3 @@ class AddScoreBottomSheet extends StatelessWidget {
     );
   }
 }
-

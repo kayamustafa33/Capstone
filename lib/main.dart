@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'src/services/auth_service.dart';
 import 'src/views/homeScreen/HomeScreen.dart';
+import 'src/views/ScoresScreen/ScoresScreen.dart';
+import 'src/views/profileScreen/ProfileScreen.dart';
+import 'src/views/widgets/bottomNavBar.dart';
+import 'src/models/User.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,9 +39,46 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
         routes: {
           LoginScreen.routeName: (context) => const LoginScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
         },
       ),
+    );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  final User user;
+  const MainScreen({super.key, required this.user});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
+
+  late final List<Widget> _children;
+
+  @override
+  void initState() {
+    super.initState();
+    _children = [
+      HomeScreen(user: widget.user),
+      const ScoresScreen(),
+      const ProfileScreen(),
+    ];
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: customBottomNavBar(onTabTapped, _currentIndex),
     );
   }
 }
