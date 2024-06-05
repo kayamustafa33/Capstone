@@ -30,7 +30,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                   child: TextField(
                     controller: scoreController,
                     decoration: InputDecoration(
-                      labelText: "Skor ekle",
+                      labelText: "Add Score",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -38,7 +38,18 @@ class AddScoreBottomSheet extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly,
-                    ], // Only numbers can be entered
+                      TextInputFormatter.withFunction((oldValue, newValue) {
+                        // Allow only values between 0 and 10
+                        if (newValue.text.isEmpty) {
+                          return newValue;
+                        }
+                        final value = int.tryParse(newValue.text);
+                        if (value != null && value >= 0 && value <= 10) {
+                          return newValue;
+                        }
+                        return oldValue;
+                      }),
+                    ],
                   ),
                 ),
                 Padding(
@@ -52,7 +63,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Ekle",
+                        "Submit",
                         style: buttonNameStyle,
                       ),
                       onPressed: onSubmit,

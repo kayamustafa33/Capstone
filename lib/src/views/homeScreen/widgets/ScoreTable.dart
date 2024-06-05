@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'CustomBottomSheet.dart';
 
 class ScoreTableCell extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final bool? isDetector;
+
   const ScoreTableCell(
       {super.key, required this.text, this.onTap, required this.isDetector});
 
@@ -38,11 +38,14 @@ class ScoreTableCell extends StatelessWidget {
 class ScoreTable extends StatelessWidget {
   final List<List<int>> allScores;
   final bool? isDetector;
-  const ScoreTable(
-      {super.key,
-      required this.allScores,
-      required this.isDetector,
-      required Null Function(dynamic set, dynamic arrow) onCellTap});
+  final Function(int set, int arrow) onCellTap;
+
+  const ScoreTable({
+    super.key,
+    required this.allScores,
+    required this.isDetector,
+    required this.onCellTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +79,9 @@ class ScoreTable extends StatelessWidget {
               children: <Widget>[
                 ScoreTableCell(text: "", isDetector: isDetector),
                 for (int i = 0; i < 6; i++)
-                  ScoreTableCell(text: "Atış ${i + 1}", isDetector: isDetector),
-                ScoreTableCell(text: "Toplam", isDetector: isDetector),
+                  ScoreTableCell(
+                      text: "Arrow ${i + 1}", isDetector: isDetector),
+                ScoreTableCell(text: "Total", isDetector: isDetector),
               ],
             ),
             for (int i = 0; i < allScores.length; i++)
@@ -86,27 +90,31 @@ class ScoreTable extends StatelessWidget {
                   ScoreTableCell(text: "Set ${i + 1}", isDetector: isDetector),
                   for (int j = 0; j < 6; j++)
                     ScoreTableCell(
-                      text: "${allScores[i][j]}",
+                      text: allScores[i][j] == -1 ? "X" : "${allScores[i][j]}",
                       isDetector: isDetector,
                       onTap: () {
-                        _showBottomSheet(context);
+                        if (allScores[i][j] == -1) {
+                          onCellTap(i, j);
+                        }
                       },
                     ),
                   ScoreTableCell(
-                      text:
-                          "${allScores[i].reduce((value, element) => value + element)}",
-                      isDetector: isDetector),
+                    text: allScores[i].contains(-1)
+                        ? ""
+                        : "${allScores[i].where((score) => score != -1).reduce((value, element) => value + element)}",
+                    isDetector: isDetector,
+                  ),
                 ],
               ),
             TableRow(
               children: <Widget>[
-                ScoreTableCell(text: "Toplam", isDetector: isDetector),
+                ScoreTableCell(text: "Total", isDetector: isDetector),
                 for (int j = 0; j < 6; j++)
                   ScoreTableCell(text: "", isDetector: isDetector),
                 ScoreTableCell(
-                    text:
-                        "${allScores.expand((scores) => scores).reduce((value, element) => value + element)}",
-                    isDetector: isDetector),
+                  text: _totalScore(),
+                  isDetector: isDetector,
+                ),
               ],
             ),
           ],
@@ -115,14 +123,13 @@ class ScoreTable extends StatelessWidget {
     );
   }
 
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        // return const AddScoreBottomSheet();
-        return SizedBox();
-      },
-    );
+  String _totalScore() {
+    try {
+      return allScores.expand((scores) => scores).contains(-1)
+          ? ""
+          : "${allScores.expand((scores) => scores).where((score) => score != -1).reduce((value, element) => value + element)}";
+    } catch (e) {
+      return "";
+    }
   }
 }

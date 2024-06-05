@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
+import 'package:capstone/src/services/auth_service.dart';
+import 'package:capstone/src/models/User.dart';
+import '../../../main.dart';
+import '../homeScreen/HomeScreen.dart';
 import '../loginScreen/LoginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   double _opacity = 0.0;
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -21,16 +25,23 @@ class _SplashScreenState extends State<SplashScreen> {
         _opacity = 1.0;
       });
     });
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    User? user = await _authService.getUser();
     Timer(const Duration(seconds: 3), () {
-      setState(() {
-        _opacity = 0.0;
-      });
-      Timer(const Duration(milliseconds: 1000), () {
+      if (user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen(user: user)),
+        );
+      } else {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
-      });
+      }
     });
   }
 

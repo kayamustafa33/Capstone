@@ -1,28 +1,31 @@
-class Club {
-  int clubId;
-  String clubName;
-  String city;
-  String contactInfo;
-  String representative;
-  String logo;
+class Competition {
+  int competitionId;
+  String competitionName;
+  String competitionStyle;
+  DateTime competitionDate;
+  String location;
+  DateTime startTime;
+  DateTime endTime;
 
-  Club({
-    required this.clubId,
-    required this.clubName,
-    required this.city,
-    required this.contactInfo,
-    required this.representative,
-    required this.logo,
+  Competition({
+    required this.competitionId,
+    required this.competitionName,
+    required this.competitionStyle,
+    required this.competitionDate,
+    required this.location,
+    required this.startTime,
+    required this.endTime,
   });
 
-  factory Club.fromMap(Map<String, dynamic> map) {
-    return Club(
-      clubId: map['club_id'],
-      clubName: map['club_name'],
-      city: map['city'],
-      contactInfo: map['contact_info'],
-      representative: map['representative'],
-      logo: map['logo'],
+  factory Competition.fromMap(Map<dynamic, dynamic> map) {
+    return Competition(
+      competitionId: map['competition_id'],
+      competitionName: map['competition_name'],
+      competitionStyle: map['competition_style'],
+      competitionDate: map['competition_date'],
+      location: map['location'],
+      startTime: map['startTime'],
+      endTime: map['endTime'],
     );
   }
 }

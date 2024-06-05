@@ -3,9 +3,9 @@ import 'package:capstone/src/views/homeScreen/widgets/ScoreTable.dart';
 import 'package:flutter/material.dart';
 import '../../models/PlayerCompetition.dart';
 import '../../models/User.dart';
+import '../../services/competition_service.dart';
 import '../../services/player_compitition_service.dart';
 import '../../services/player_service.dart';
-import '../../services/competition_service.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _hasCompetition = false;
   bool _isLoading = true;
   String? _errorMessage;
+  int? _currentCompetitionId;
 
   @override
   void initState() {
@@ -47,12 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
         int? competitionId =
             await _competitionService.fetchActiveCompetitionId();
         if (competitionId != null) {
+          setState(() {
+            _currentCompetitionId = competitionId;
+          });
           await _fetchScores(playerId, competitionId);
         }
       }
     } catch (e) {
       setState(() {
-        _errorMessage = "Bir hata oluştu: $e";
+        _errorMessage = "An error occurred: $e";
       });
     } finally {
       setState(() {
@@ -91,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = "Bir hata oluştu: $e";
+        _errorMessage = "An error occurred: $e";
       });
     }
   }
@@ -108,29 +112,34 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showBottomSheet(BuildContext context, int set, int arrow) {
     final TextEditingController scoreController = TextEditingController();
-
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (BuildContext context) {
+      builder: (BuildContext ctx) {
         return AddScoreBottomSheet(
           scoreController: scoreController,
           onSubmit: () {
             final score = int.tryParse(scoreController.text);
-            if (score != null) {
+            if (score != null && score >= 0 && score <= 10) {
               final playerCompetition = PlayerCompetition(
                 playerCompId: 0,
-                set: _currentSet + 1,
+                set: set + 1,
                 playerId: widget.user.userId,
-                competitionId: 1,
-                arrowCount: _currentArrow + 1,
+                competitionId: _currentCompetitionId!,
+                arrowCount: arrow + 1,
                 score: score,
               );
               _playerCompetitionService.postScore(playerCompetition);
-              _updateScore(_currentSet, _currentArrow, score);
-              Navigator.pop(context);
+              _updateScore(set, arrow, score);
+              Navigator.pop(ctx);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content:
+                        Text('Please enter a valid score between 0 and 10.')),
+              );
             }
           },
         );
@@ -145,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          "Hoşgeldin $archerName",
+          "Welcome $archerName",
           style: const TextStyle(color: Colors.white),
         ),
         elevation: 2.0,
@@ -182,9 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               allScores: _scores,
                               isDetector: true,
                               onCellTap: (set, arrow) {
-                                if (set == _currentSet + 1 &&
-                                    arrow == _currentArrow + 1) {
-                                  _showBottomSheet(context);
+                                if (set == _currentSet &&
+                                    arrow == _currentArrow) {
+                                  _showBottomSheet(context, set, arrow);
                                 }
                               },
                             ),
@@ -193,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ))
                       : Center(
                           child: Text(
-                            "Henüz aktif bir yarışma yok",
+                            "No active competition yet",
                             style: TextStyle(fontSize: 20, color: Colors.red),
                           ),
                         ),

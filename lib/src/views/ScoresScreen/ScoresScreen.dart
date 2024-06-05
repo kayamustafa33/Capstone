@@ -1,6 +1,8 @@
-import 'package:capstone/src/views/ScoresScreen/widgets/ShowCurrentScores.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/score_service.dart';
+import '../../services/competition_service.dart';
+import '../../models/Score.dart';
 
 class ScoresScreen extends StatefulWidget {
   const ScoresScreen({super.key});
@@ -12,25 +14,75 @@ class ScoresScreen extends StatefulWidget {
 }
 
 class _ScoresScreenState extends State<ScoresScreen> {
+  final ScoreService _scoreService = ScoreService();
+  final CompetitionService _competitionService = CompetitionService();
+  late Future<List<Score>> _scoresFuture;
+  int _userId = 0;
+  bool _isLoading = true;
 
   @override
-  Widget build (BuildContext context) {
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userId = prefs.getInt('userId') ?? 0;
+
+    int? competitionId = await _competitionService.fetchActiveCompetitionId();
+
+    if (competitionId != null) {
+      setState(() {
+        _userId = userId;
+        _scoresFuture = _scoreService.fetchScores(competitionId, _userId);
+        _isLoading = false;
+      });
+    } else {
+      // Handle case where no active competition is found
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue,
-        title: const Text("Skorlar",style: TextStyle(color: Colors.white)),
+        title: const Text("Skorlar", style: TextStyle(color: Colors.white)),
       ),
-      body: Column(
-        children: [
-          showCurrentScores("playerID", [
-            ['Player 2', '100'],
-            ['Player 3', '85'],
-            ['Player 4', '70']
-          ])
-        ],
-      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : FutureBuilder<List<Score>>(
+              future: _scoresFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text('No scores available'));
+                } else {
+                  final scores = snapshot.data!;
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: scores.length,
+                    itemBuilder: (context, index) {
+                      final score = scores[index];
+                      return Card(
+                        child: ListTile(
+                          title: Text(score.playerName),
+                          trailing: Text(score.totalScore.toString()),
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
     );
   }
-
 }

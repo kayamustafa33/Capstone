@@ -1,13 +1,18 @@
-import 'package:capstone/src/views/profileScreen/widgets/widgets.dart';
+import 'package:capstone/src/views/profileScreen/widgets/ActivitiesScreen.dart';
+import 'package:capstone/src/views/profileScreen/widgets/ClubsScreen.dart';
+import 'package:capstone/src/views/profileScreen/widgets/OldScoresScreen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:capstone/src/services/auth_service.dart';
 import '../loginScreen/LoginScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   static const String routeName = "/profileScreen";
+
   @override
   Widget build(BuildContext context) {
+    final AuthService _authService = AuthService();
+
     return Material(
       color: Colors.white,
       child: Stack(
@@ -97,11 +102,7 @@ class ProfileScreen extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                          );
+                          _showLogoutDialog(context, _authService);
                         },
                         child: const Text(
                           'Çıkış Yap',
@@ -116,6 +117,37 @@ class ProfileScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context, AuthService authService) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Çıkış Yap'),
+          content: const Text('Oturumu kapatmak istediğinizden emin misiniz?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('İptal'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Çıkış Yap'),
+              onPressed: () async {
+                await authService.logout();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -26,17 +26,26 @@ class PlayerCompetitionService {
     return scores;
   }
 
+  Future<int> _getNextPlayerCompId() async {
+    final conn = await _databaseService.connection;
+    final results = await conn
+        .query('SELECT MAX(player_comp_id) AS max_id FROM player_competition');
+    int nextId = results.first['max_id'] + 1;
+    return nextId;
+  }
+
   Future<void> postScore(PlayerCompetition playerCompetition) async {
+    final nextId = await _getNextPlayerCompId();
     final conn = await _databaseService.connection;
     await conn.query(
-      'INSERT INTO player_competition (player_id, set, competition_id, arrow, score, total_score) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO player_competition (player_comp_id, player_id, `set`, competition_id, arrow, score) VALUES (?, ?, ?, ?, ?, ?)',
       [
+        nextId,
         playerCompetition.playerId,
         playerCompetition.set,
         playerCompetition.competitionId,
         playerCompetition.arrowCount,
         playerCompetition.score,
-        playerCompetition.arrowCount * playerCompetition.score
       ],
     );
   }
