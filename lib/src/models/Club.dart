@@ -4,7 +4,7 @@ class Club {
   String city;
   String contactInfo;
   String representative;
-  String logo;
+  String? logo;
 
   Club({
     required this.clubId,
@@ -12,7 +12,7 @@ class Club {
     required this.city,
     required this.contactInfo,
     required this.representative,
-    required this.logo,
+    this.logo,
   });
 
   factory Club.fromMap(Map<String, dynamic> map) {

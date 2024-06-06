@@ -25,7 +25,7 @@ class _OldScoresScreenState extends State<OldScoresScreen> {
 
   Future<void> _loadUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int userId = prefs.getInt('user_id') ?? 0;
+    int userId = prefs.getInt('userId') ?? 0;
     setState(() {
       _userId = userId;
       _isLoadingUserId = false;

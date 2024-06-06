@@ -1,4 +1,7 @@
+// src/blocks/club_bloc/club_bloc.dart
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../services/club_service.dart';
 import 'club_event.dart';
 import 'club_state.dart';
@@ -14,9 +17,9 @@ class ClubBloc extends Bloc<ClubEvent, ClubState> {
       yield ClubLoading();
       try {
         final clubs = await clubService.fetchClubs();
-        yield ClubLoaded(clubs);
+        yield ClubLoaded(clubs: clubs);
       } catch (e) {
-        yield ClubError(e.toString());
+        yield ClubError(message: 'Failed to fetch clubs');
       }
     }
   }

@@ -86,22 +86,6 @@ class ProfileScreen extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ActivitiesScreen()),
-                          );
-                        },
-                        child: const Text(
-                          'Aktiviteler',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {
                           _showLogoutDialog(context, _authService);
                         },
                         child: const Text(

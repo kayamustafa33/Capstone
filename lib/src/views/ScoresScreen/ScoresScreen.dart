@@ -23,6 +23,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
   @override
   void initState() {
     super.initState();
+    _scoresFuture = Future.value([]);
     _initializeData();
   }
 
@@ -42,6 +43,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
       // Handle case where no active competition is found
       setState(() {
         _isLoading = false;
+        _scoresFuture = Future.value([]); // Ensure _scoresFuture is not null
       });
     }
   }

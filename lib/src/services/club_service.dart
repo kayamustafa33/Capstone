@@ -22,4 +22,18 @@ class ClubService {
 
     return clubs;
   }
+
+  Future<List<Club>> fetchClubsForPlayer(int playerId) async {
+    final conn = await DatabaseService().connection;
+    final results = await conn.query('''
+      SELECT c.club_id, c.club_name, c.city, c.contact_info, c.representative, c.logo
+      FROM player p
+      JOIN clubs c ON p.club_id = c.club_id
+      WHERE p.player_id = ?
+    ''', [playerId]);
+
+    return results.map((row) {
+      return Club.fromMap(row.fields);
+    }).toList();
+  }
 }
