@@ -1,10 +1,10 @@
-import 'package:capstone/src/blocks/Auth/auth_bloc.dart';
-import 'package:capstone/src/blocks/ClubBloc/club_bloc.dart';
-import 'package:capstone/src/services/club_service.dart';
-import 'package:capstone/src/views/loginScreen/LoginScreen.dart';
-import 'package:capstone/src/views/splashScreen/SplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:okculuk_federasyonu/src/blocks/Auth/auth_bloc.dart';
+import 'package:okculuk_federasyonu/src/blocks/ClubBloc/club_bloc.dart';
+import 'package:okculuk_federasyonu/src/services/club_service.dart';
+import 'package:okculuk_federasyonu/src/views/loginScreen/LoginScreen.dart';
+import 'package:okculuk_federasyonu/src/views/splashScreen/SplashScreen.dart';
 import 'src/services/auth_service.dart';
 import 'src/views/homeScreen/HomeScreen.dart';
 import 'src/views/ScoresScreen/ScoresScreen.dart';
@@ -13,7 +13,7 @@ import 'src/views/widgets/bottomNavBar.dart';
 import 'src/models/User.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

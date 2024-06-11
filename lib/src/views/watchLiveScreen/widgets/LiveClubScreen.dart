@@ -1,14 +1,6 @@
-// src/views/live_club_screen/live_club_screen.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../blocks/ClubBloc/club_bloc.dart';
-import '../../../blocks/ClubBloc/club_event.dart';
-import '../../../blocks/ClubBloc/club_state.dart';
 import '../../../models/Club.dart';
 import '../../../services/club_service.dart';
-import '../../../services/player_service.dart';
-import '../../widgets/ClubsWidget.dart';
 
 class LiveClubScreen extends StatefulWidget {
   const LiveClubScreen({super.key});
@@ -53,9 +45,9 @@ class _LiveClubScreenState extends State<LiveClubScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('Hata: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No clubs available'));
+                  return Center(child: Text('Kulüp mevcut değil'));
                 } else {
                   final clubs = snapshot.data!;
                   return ListView.builder(

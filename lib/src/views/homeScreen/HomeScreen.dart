@@ -1,6 +1,6 @@
-import 'package:capstone/src/views/homeScreen/widgets/CustomBottomSheet.dart';
-import 'package:capstone/src/views/homeScreen/widgets/ScoreTable.dart';
 import 'package:flutter/material.dart';
+import 'package:okculuk_federasyonu/src/views/homeScreen/widgets/CustomBottomSheet.dart';
+import 'package:okculuk_federasyonu/src/views/homeScreen/widgets/ScoreTable.dart';
 import '../../models/PlayerCompetition.dart';
 import '../../models/User.dart';
 import '../../services/competition_service.dart';
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = "An error occurred: $e";
+        _errorMessage = "Bir hata oluştu: $e";
       });
     } finally {
       setState(() {
@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = "An error occurred: $e";
+        _errorMessage = "Bir hata oluştu: $e";
       });
     }
   }
@@ -137,8 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                    content:
-                        Text('Please enter a valid score between 0 and 10.')),
+                    content: Text(
+                        'Lütfen 0 ile 10 arasında geçerli bir puan girin.')),
               );
             }
           },
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          "Welcome $archerName",
+          "Hoş geldin $archerName",
           style: const TextStyle(color: Colors.white),
         ),
         elevation: 2.0,
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ))
                       : Center(
                           child: Text(
-                            "No active competition yet",
+                            "Henüz aktif bir yarışma yok",
                             style: TextStyle(fontSize: 20, color: Colors.red),
                           ),
                         ),

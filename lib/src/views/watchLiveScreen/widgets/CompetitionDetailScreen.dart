@@ -24,7 +24,10 @@ class CompetitionDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(competition.competitionName),
+        title: Text(
+          competition.competitionName,
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
@@ -43,11 +46,11 @@ class CompetitionDetailScreen extends StatelessWidget {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Date: ${_formatDate(competition.competitionDate)}'),
+                    Text('Tarih: ${_formatDate(competition.competitionDate)}'),
                     Text(
-                        'Time: ${_formatTime(competition.startTime)} - ${_formatTime(competition.endTime)}'),
-                    Text('Location: ${competition.location}'),
-                    Text('Style: ${competition.competitionStyle}'),
+                        'Zaman: ${_formatTime(competition.startTime)} - ${_formatTime(competition.endTime)}'),
+                    Text('Konum: ${competition.location}'),
+                    Text('Stil: ${competition.competitionStyle}'),
                   ],
                 ),
               ),
@@ -60,30 +63,37 @@ class CompetitionDetailScreen extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(child: Text('Hata: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(child: Text('No scores available'));
+                    return Center(child: Text('Puan mevcut değil'));
                   } else {
                     return Card(
                       elevation: 2,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: DataTable(
-                              columns: [
-                                DataColumn(label: Text('Player Name')),
-                                DataColumn(label: Text('Total Score')),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: DataTable(
+                                    columns: [
+                                      DataColumn(label: Text('Oyuncu ismi')),
+                                      DataColumn(label: Text('Toplam puan')),
+                                    ],
+                                    rows: snapshot.data!.map((score) {
+                                      return DataRow(cells: [
+                                        DataCell(Text(score.playerName)),
+                                        DataCell(
+                                            Text(score.totalScore.toString())),
+                                      ]);
+                                    }).toList(),
+                                  ),
+                                ),
                               ],
-                              rows: snapshot.data!.map((score) {
-                                return DataRow(cells: [
-                                  DataCell(Text(score.playerName)),
-                                  DataCell(Text(score.totalScore.toString())),
-                                ]);
-                              }).toList(),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   }

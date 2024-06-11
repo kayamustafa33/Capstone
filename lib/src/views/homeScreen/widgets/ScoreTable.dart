@@ -108,7 +108,7 @@ class ScoreTable extends StatelessWidget {
               ),
             TableRow(
               children: <Widget>[
-                ScoreTableCell(text: "Total", isDetector: isDetector),
+                ScoreTableCell(text: "Toplam", isDetector: isDetector),
                 for (int j = 0; j < 6; j++)
                   ScoreTableCell(text: "", isDetector: isDetector),
                 ScoreTableCell(

@@ -1,5 +1,6 @@
-import 'package:capstone/src/views/homeScreen/widgets/ScoreTable.dart';
 import 'package:flutter/material.dart';
+
+import '../../homeScreen/widgets/ScoreTable.dart';
 
 class LiveScoreTableCell extends StatelessWidget {
   final String text;

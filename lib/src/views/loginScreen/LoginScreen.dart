@@ -1,12 +1,10 @@
-import 'package:capstone/main.dart';
-import 'package:capstone/src/util/util.dart';
-import 'package:capstone/src/views/watchLiveScreen/WatchLiveScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../main.dart';
 import '../../blocks/Auth/auth_bloc.dart';
-import '../homeScreen/HomeScreen.dart';
 import '../../models/User.dart';
 import '../../services/auth_service.dart';
+import '../watchLiveScreen/WatchLiveScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,33 +40,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email cannot be empty';
+      return 'E-posta boş olamaz';
     }
     if (value.length > 150) {
-      return 'Email cannot be longer than 150 characters';
+      return 'E-posta 150 karakterden uzun olamaz';
     }
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     if (!emailRegex.hasMatch(value)) {
-      return 'Enter a valid email address';
+      return 'Geçerli bir e-posta adresi girin';
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password cannot be empty';
+      return 'Şifre boş olamaz';
     }
     if (value.length > 100) {
-      return 'Password cannot be longer than 100 characters';
+      return 'Şifre 100 karakterden uzun olamaz';
     }
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    _emailController.text = "Güney_Albayrak@gmail.com";
-    _passwordController.text = "000";
-
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -209,8 +204,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       controller: widget.controller,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        labelText: 'Password',
-        hintText: 'Enter your password',
+        labelText: 'Şifre',
+        hintText: 'Şifre girin',
         prefixIcon: const Icon(Icons.lock),
         suffixIcon: IconButton(
           icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),

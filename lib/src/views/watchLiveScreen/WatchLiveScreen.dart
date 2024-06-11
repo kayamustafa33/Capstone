@@ -1,21 +1,22 @@
-import 'package:capstone/src/views/watchLiveScreen/widgets/LiveClubScreen.dart';
-import 'package:capstone/src/views/watchLiveScreen/widgets/LiveScoresScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:okculuk_federasyonu/src/views/watchLiveScreen/widgets/LiveClubScreen.dart';
+import 'package:okculuk_federasyonu/src/views/watchLiveScreen/widgets/LiveScoresScreen.dart';
 import '../widgets/bottomNavBar.dart';
 
 class WatchLiveScreen extends StatelessWidget {
   const WatchLiveScreen({super.key});
 
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (RouteSettings settings) {
           if (settings.name == LiveScoresScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => const LiveScoresScreen());
+            return MaterialPageRoute(
+                builder: (context) => const LiveScoresScreen());
           } else if (settings.name == LiveClubScreen.routeName) {
-            return MaterialPageRoute(builder: (context) => const LiveClubScreen());
+            return MaterialPageRoute(
+                builder: (context) => const LiveClubScreen());
           }
           return null;
         },
@@ -48,6 +49,7 @@ class _LiveScreenStates extends State<LiveScreen> {
 
     return Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: customWatchLiveBottomNav(onTabTapped, _currentIndex));
+        bottomNavigationBar:
+            customWatchLiveBottomNav(onTabTapped, _currentIndex));
   }
 }

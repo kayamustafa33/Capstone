@@ -1,8 +1,8 @@
-import 'package:capstone/src/views/profileScreen/widgets/ActivitiesScreen.dart';
-import 'package:capstone/src/views/profileScreen/widgets/ClubsScreen.dart';
-import 'package:capstone/src/views/profileScreen/widgets/OldScoresScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:capstone/src/services/auth_service.dart';
+import 'package:okculuk_federasyonu/src/views/profileScreen/widgets/ClubsScreen.dart';
+import 'package:okculuk_federasyonu/src/views/profileScreen/widgets/OldScoresScreen.dart';
+
+import '../../services/auth_service.dart';
 import '../loginScreen/LoginScreen.dart';
 
 class ProfileScreen extends StatelessWidget {

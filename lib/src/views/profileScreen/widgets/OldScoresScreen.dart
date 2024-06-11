@@ -51,9 +51,9 @@ class _OldScoresScreenState extends State<OldScoresScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('Hata: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No scores available'));
+                  return Center(child: Text('Puan mevcut değil'));
                 } else {
                   final scores = snapshot.data!;
                   return ListView.builder(

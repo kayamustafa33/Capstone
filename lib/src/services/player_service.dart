@@ -1,6 +1,4 @@
-import 'package:mysql1/mysql1.dart';
 import 'db_service.dart';
-import '../models/Player.dart';
 
 class PlayerService {
   final DatabaseService _databaseService = DatabaseService();

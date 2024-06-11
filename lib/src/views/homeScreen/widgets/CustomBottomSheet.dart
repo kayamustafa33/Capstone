@@ -63,7 +63,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "Submit",
+                        "Gönder",
                         style: buttonNameStyle,
                       ),
                       onPressed: onSubmit,

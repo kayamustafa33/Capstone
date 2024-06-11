@@ -25,7 +25,10 @@ class _LiveScoresScreenState extends State<LiveScoresScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Active Competitions'),
+        title: Text(
+          'Aktif Yarışmalar',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blueAccent,
       ),
       body: FutureBuilder<List<Competition>>(
@@ -34,9 +37,9 @@ class _LiveScoresScreenState extends State<LiveScoresScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Hata: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No active competitions'));
+            return Center(child: Text('Aktif yarışma yok'));
           } else {
             return ListView.builder(
               itemCount: snapshot.data!.length,

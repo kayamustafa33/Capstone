@@ -40,10 +40,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
         _isLoading = false;
       });
     } else {
-      // Handle case where no active competition is found
       setState(() {
         _isLoading = false;
-        _scoresFuture = Future.value([]); // Ensure _scoresFuture is not null
+        _scoresFuture = Future.value([]);
       });
     }
   }
@@ -64,9 +63,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('Hata: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No scores available'));
+                  return Center(child: Text('Puan yok'));
                 } else {
                   final scores = snapshot.data!;
                   return ListView.builder(

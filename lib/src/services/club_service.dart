@@ -1,4 +1,3 @@
-import 'package:mysql1/mysql1.dart';
 import '../models/Club.dart';
 import 'db_service.dart';
 
