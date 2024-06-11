@@ -25,21 +25,33 @@ class CompetitionDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(competition.competitionName),
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Date: ${_formatDate(competition.competitionDate)} at ${_formatTime(competition.startTime)} - ${_formatTime(competition.endTime)}',
-              style: TextStyle(fontSize: 16),
+            Card(
+              elevation: 2,
+              margin: const EdgeInsets.only(bottom: 16.0),
+              child: ListTile(
+                title: Text(
+                  competition.competitionName,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Date: ${_formatDate(competition.competitionDate)}'),
+                    Text(
+                        'Time: ${_formatTime(competition.startTime)} - ${_formatTime(competition.endTime)}'),
+                    Text('Location: ${competition.location}'),
+                    Text('Style: ${competition.competitionStyle}'),
+                  ],
+                ),
+              ),
             ),
-            Text('Location: ${competition.location}',
-                style: TextStyle(fontSize: 16)),
-            Text('Style: ${competition.competitionStyle}',
-                style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16),
             Expanded(
               child: FutureBuilder<List<Score>>(
                 future: ScoreService()
@@ -52,17 +64,27 @@ class CompetitionDetailScreen extends StatelessWidget {
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(child: Text('No scores available'));
                   } else {
-                    return DataTable(
-                      columns: [
-                        DataColumn(label: Text('Player Name')),
-                        DataColumn(label: Text('Total Score')),
-                      ],
-                      rows: snapshot.data!.map((score) {
-                        return DataRow(cells: [
-                          DataCell(Text(score.playerName)),
-                          DataCell(Text(score.totalScore.toString())),
-                        ]);
-                      }).toList(),
+                    return Card(
+                      elevation: 2,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: DataTable(
+                              columns: [
+                                DataColumn(label: Text('Player Name')),
+                                DataColumn(label: Text('Total Score')),
+                              ],
+                              rows: snapshot.data!.map((score) {
+                                return DataRow(cells: [
+                                  DataCell(Text(score.playerName)),
+                                  DataCell(Text(score.totalScore.toString())),
+                                ]);
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }
                 },

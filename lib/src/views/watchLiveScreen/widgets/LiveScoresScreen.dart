@@ -26,6 +26,7 @@ class _LiveScoresScreenState extends State<LiveScoresScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Active Competitions'),
+        backgroundColor: Colors.blueAccent,
       ),
       body: FutureBuilder<List<Competition>>(
         future: _competitions,
@@ -41,19 +42,32 @@ class _LiveScoresScreenState extends State<LiveScoresScreen> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final competition = snapshot.data![index];
-                return ListTile(
-                  title: Text(competition.competitionName),
-                  subtitle: Text(
-                      '${competition.competitionDate} at ${competition.location}'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            CompetitionDetailScreen(competition: competition),
-                      ),
-                    );
-                  },
+                return Card(
+                  elevation: 2,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: ListTile(
+                    title: Text(
+                      competition.competitionName,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      '${competition.competitionDate.toIso8601String().split('T').first} at ${competition.location}',
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    ),
+                    trailing:
+                        Icon(Icons.arrow_forward, color: Colors.blueAccent),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CompetitionDetailScreen(competition: competition),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             );

@@ -6,7 +6,7 @@ class ScoreService {
   Future<List<Score>> fetchScoresByCompetitionId(int competitionId) async {
     final conn = await DatabaseService().connection;
     final results = await conn.query('''
-      SELECT u.name AS playerName, SUM(pc.total_score) AS totalScore
+      SELECT u.name AS playerName, SUM(pc.score) AS totalScore
       FROM player_competition pc
       JOIN player p ON pc.player_id = p.player_id
       JOIN users u ON p.user_id = u.user_id
@@ -25,7 +25,7 @@ class ScoreService {
   Future<List<Score>> fetchScores(int competitionId, int userId) async {
     final conn = await DatabaseService().connection;
     final results = await conn.query('''
-      SELECT u.name AS playerName, SUM(pc.total_score) AS totalScore
+      SELECT u.name AS playerName, SUM(pc.score) AS totalScore
       FROM player_competition pc
       JOIN player p ON pc.player_id = p.player_id
       JOIN users u ON p.user_id = u.user_id
@@ -44,7 +44,7 @@ class ScoreService {
   Future<List<Score>> fetchOldScores(int userId) async {
     final conn = await DatabaseService().connection;
     final results = await conn.query('''
-      SELECT c.competition_name AS competitionName, SUM(pc.total_score) AS totalScore
+      SELECT c.competition_name AS competitionName, SUM(pc.score) AS totalScore
       FROM player_competition pc
       JOIN competition c ON pc.competition_id = c.competition_id
       WHERE pc.player_id = ? AND c.competition_date < CURDATE()
