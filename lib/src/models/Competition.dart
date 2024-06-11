@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+
 class Competition {
   int competitionId;
   String competitionName;
   String competitionStyle;
   DateTime competitionDate;
   String location;
-  DateTime startTime;
-  DateTime endTime;
+  TimeOfDay startTime;
+  TimeOfDay endTime;
 
   Competition({
     required this.competitionId,
@@ -22,10 +24,17 @@ class Competition {
       competitionId: map['competition_id'],
       competitionName: map['competition_name'],
       competitionStyle: map['competition_style'],
-      competitionDate: map['competition_date'],
+      competitionDate: DateTime.parse(map['competition_date'].toString()),
       location: map['location'],
-      startTime: map['startTime'],
-      endTime: map['endTime'],
+      startTime: _parseTime(map['startTime'].toString()),
+      endTime: _parseTime(map['endTime'].toString()),
     );
+  }
+
+  static TimeOfDay _parseTime(String time) {
+    final parts = time.split(':');
+    final hour = int.parse(parts[0]);
+    final minute = int.parse(parts[1]);
+    return TimeOfDay(hour: hour, minute: minute);
   }
 }

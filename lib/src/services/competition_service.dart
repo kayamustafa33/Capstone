@@ -5,6 +5,18 @@ import '../models/Competition.dart';
 class CompetitionService {
   final DatabaseService _databaseService = DatabaseService();
 
+  Future<List<Competition>> fetchActiveCompetitions() async {
+    print("fetch active competitions called");
+    final conn = await _databaseService.connection;
+    final results = await conn.query(
+      'SELECT * FROM competition WHERE NOW() BETWEEN CONCAT(competition_date, " ", startTime) AND CONCAT(competition_date, " ", endTime);',
+    );
+
+    return results.map((row) {
+      return Competition.fromMap(row.fields);
+    }).toList();
+  }
+
   Future<int?> fetchActiveCompetitionId() async {
     final conn = await _databaseService.connection;
     final results = await conn.query(
