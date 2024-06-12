@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:okculuk_federasyonu/src/views/profileScreen/widgets/ClubsScreen.dart';
 import 'package:okculuk_federasyonu/src/views/profileScreen/widgets/OldScoresScreen.dart';
 
+import '../../models/User.dart';
 import '../../services/auth_service.dart';
 import '../loginScreen/LoginScreen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
   static const String routeName = "/profileScreen";
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late Future<User?> _userFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _userFuture = _fetchUser();
+  }
+
+  Future<User?> _fetchUser() async {
+    final AuthService authService = AuthService();
+    return await authService.getUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +59,18 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text("Kullanıcı adı")],
+              FutureBuilder<User?>(
+                future: _userFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError || !snapshot.hasData) {
+                    return Text("Kullanıcı adı yüklenemedi");
+                  } else {
+                    final user = snapshot.data!;
+                    return Text(user.name);
+                  }
+                },
               ),
               const SizedBox(height: 10),
               Container(
