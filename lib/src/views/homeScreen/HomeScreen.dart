@@ -124,14 +124,14 @@ class _HomeScreenState extends State<HomeScreen> {
             final text = scoreController.text.trim().toUpperCase();
             int score;
             if (text == 'M') {
-              score = 0;
+              score = 77;
             } else if (text == 'X') {
-              score = 10;
+              score = 88;
             } else {
               score = int.tryParse(text) ?? -1;
             }
 
-            if (score >= 0 && score <= 10) {
+            if (score == 77 || score == 88 || (score >= 0 && score <= 10)) {
               final playerCompetition = PlayerCompetition(
                 playerCompId: 0,
                 set: set + 1,

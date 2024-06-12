@@ -1,74 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ScoreTableCell extends StatelessWidget {
-  final String text;
-  final VoidCallback? onTap;
-  final bool? isDetector;
-
-  const ScoreTableCell({
-    super.key,
-    required this.text,
-    this.onTap,
-    required this.isDetector,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (isDetector == true) {
-      return GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: 70,
-          height: 70,
-          padding: const EdgeInsets.all(8.0),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Text(
-            text,
-            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
-    } else {
-      return Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Text(
-              text,
-              style:
-                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      );
-    }
-  }
-}
+import 'ScoreTableCell.dart';
 
 class ScoreTable extends StatelessWidget {
   final List<List<int>> allScores;
@@ -81,6 +14,15 @@ class ScoreTable extends StatelessWidget {
     required this.isDetector,
     required this.onCellTap,
   });
+
+  int _convertScore(int score) {
+    if (score == 88) {
+      return 10;
+    } else if (score == 77) {
+      return 0;
+    }
+    return score;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,10 +71,12 @@ class ScoreTable extends StatelessWidget {
                   for (int j = 0; j < 6; j++)
                     ScoreTableCell(
                       text: allScores[i][j] == -1
-                          ? "M"
-                          : allScores[i][j] == 10
+                          ? "-"
+                          : allScores[i][j] == 88
                               ? "X"
-                              : "${allScores[i][j]}",
+                              : allScores[i][j] == 77
+                                  ? "M"
+                                  : "${allScores[i][j]}",
                       isDetector: isDetector,
                       onTap: () {
                         if (allScores[i][j] == -1) {
@@ -143,7 +87,7 @@ class ScoreTable extends StatelessWidget {
                   ScoreTableCell(
                     text: allScores[i].contains(-1)
                         ? ""
-                        : "${allScores[i].where((score) => score != -1).reduce((value, element) => value + element)}",
+                        : "${allScores[i].where((score) => score != -1).map(_convertScore).reduce((value, element) => value + element)}",
                     isDetector: isDetector,
                   ),
                 ],
@@ -173,7 +117,7 @@ class ScoreTable extends StatelessWidget {
     try {
       return allScores.expand((scores) => scores).contains(-1)
           ? ""
-          : "${allScores.expand((scores) => scores).where((score) => score != -1).reduce((value, element) => value + element)}";
+          : "${allScores.expand((scores) => scores).where((score) => score != -1).map(_convertScore).reduce((value, element) => value + element)}";
     } catch (e) {
       return "";
     }
