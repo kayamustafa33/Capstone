@@ -121,8 +121,17 @@ class _HomeScreenState extends State<HomeScreen> {
         return AddScoreBottomSheet(
           scoreController: scoreController,
           onSubmit: () {
-            final score = int.tryParse(scoreController.text);
-            if (score != null && score >= 0 && score <= 10) {
+            final text = scoreController.text.trim().toUpperCase();
+            int score;
+            if (text == 'M') {
+              score = 0;
+            } else if (text == 'X') {
+              score = 10;
+            } else {
+              score = int.tryParse(text) ?? -1;
+            }
+
+            if (score >= 0 && score <= 10) {
               final playerCompetition = PlayerCompetition(
                 playerCompId: 0,
                 set: set + 1,
@@ -138,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                     content: Text(
-                        'Lütfen 0 ile 10 arasında geçerli bir puan girin.')),
+                        'Lütfen M, X veya 0 ile 10 arasında geçerli bir puan girin.')),
               );
             }
           },
@@ -154,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          "Hoş geldin $archerName",
+          "Hoşgeldin $archerName",
           style: const TextStyle(color: Colors.white),
         ),
         elevation: 2.0,

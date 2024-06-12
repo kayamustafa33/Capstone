@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../util/textStyles.dart';
+import 'CustomKeyboard.dart';
 
-class AddScoreBottomSheet extends StatelessWidget {
+class AddScoreBottomSheet extends StatefulWidget {
   final TextEditingController scoreController;
   final VoidCallback onSubmit;
 
   const AddScoreBottomSheet(
       {super.key, required this.scoreController, required this.onSubmit});
+
+  @override
+  _AddScoreBottomSheetState createState() => _AddScoreBottomSheetState();
+}
+
+class _AddScoreBottomSheetState extends State<AddScoreBottomSheet> {
+  String input = '';
+
+  void _onKeyTap(String value) {
+    setState(() {
+      if (value == '<') {
+        if (input.isNotEmpty) {
+          input = input.substring(0, input.length - 1);
+        }
+      } else {
+        input = value;
+      }
+      widget.scoreController.text = input;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +48,17 @@ class AddScoreBottomSheet extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: TextField(
-                    controller: scoreController,
+                    controller: widget.scoreController,
                     decoration: InputDecoration(
-                      labelText: "Add Score",
+                      labelText: "Puan Ekle",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                      TextInputFormatter.withFunction((oldValue, newValue) {
-                        // Allow only values between 0 and 10
-                        if (newValue.text.isEmpty) {
-                          return newValue;
-                        }
-                        final value = int.tryParse(newValue.text);
-                        if (value != null && value >= 0 && value <= 10) {
-                          return newValue;
-                        }
-                        return oldValue;
-                      }),
-                    ],
+                    readOnly: true,
                   ),
                 ),
+                CustomKeyboard(onKeyTap: _onKeyTap),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: SizedBox(
@@ -66,7 +73,7 @@ class AddScoreBottomSheet extends StatelessWidget {
                         "Gönder",
                         style: buttonNameStyle,
                       ),
-                      onPressed: onSubmit,
+                      onPressed: widget.onSubmit,
                     ),
                   ),
                 ),

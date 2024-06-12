@@ -90,7 +90,11 @@ class ScoreTable extends StatelessWidget {
                   ScoreTableCell(text: "Set ${i + 1}", isDetector: isDetector),
                   for (int j = 0; j < 6; j++)
                     ScoreTableCell(
-                      text: allScores[i][j] == -1 ? "X" : "${allScores[i][j]}",
+                      text: allScores[i][j] == -1
+                          ? "M"
+                          : allScores[i][j] == 10
+                              ? "X"
+                              : "${allScores[i][j]}",
                       isDetector: isDetector,
                       onTap: () {
                         if (allScores[i][j] == -1) {
