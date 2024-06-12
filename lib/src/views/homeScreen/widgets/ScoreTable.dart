@@ -5,8 +5,12 @@ class ScoreTableCell extends StatelessWidget {
   final VoidCallback? onTap;
   final bool? isDetector;
 
-  const ScoreTableCell(
-      {super.key, required this.text, this.onTap, required this.isDetector});
+  const ScoreTableCell({
+    super.key,
+    required this.text,
+    this.onTap,
+    required this.isDetector,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,22 +18,53 @@ class ScoreTableCell extends StatelessWidget {
       return GestureDetector(
         onTap: onTap,
         child: Container(
+          width: 70,
+          height: 70,
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
           child: Text(
             text,
-            style: const TextStyle(fontSize: 16.0),
+            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
         ),
       );
     } else {
-      return Container(
-        padding: const EdgeInsets.all(8.0),
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 16.0),
-        ),
+      return Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Text(
+              text,
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       );
     }
   }
@@ -51,7 +86,7 @@ class ScoreTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8),
-      color: Colors.grey[300],
+      color: Colors.blue[50],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -59,8 +94,8 @@ class ScoreTable extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Table(
           border: const TableBorder(
-            horizontalInside: BorderSide(width: 1, color: Colors.black),
-            verticalInside: BorderSide(width: 1, color: Colors.black),
+            horizontalInside: BorderSide(width: 1, color: Colors.blueAccent),
+            verticalInside: BorderSide(width: 1, color: Colors.blueAccent),
             left: BorderSide.none,
             right: BorderSide.none,
           ),
@@ -76,12 +111,15 @@ class ScoreTable extends StatelessWidget {
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: <TableRow>[
             TableRow(
+              decoration: BoxDecoration(
+                color: Colors.blue[200],
+                borderRadius: BorderRadius.circular(10),
+              ),
               children: <Widget>[
                 ScoreTableCell(text: "", isDetector: isDetector),
                 for (int i = 0; i < 6; i++)
-                  ScoreTableCell(
-                      text: "Arrow ${i + 1}", isDetector: isDetector),
-                ScoreTableCell(text: "Total", isDetector: isDetector),
+                  ScoreTableCell(text: "Ok ${i + 1}", isDetector: isDetector),
+                ScoreTableCell(text: "Toplam", isDetector: isDetector),
               ],
             ),
             for (int i = 0; i < allScores.length; i++)
@@ -111,6 +149,10 @@ class ScoreTable extends StatelessWidget {
                 ],
               ),
             TableRow(
+              decoration: BoxDecoration(
+                color: Colors.blue[100],
+                borderRadius: BorderRadius.circular(10),
+              ),
               children: <Widget>[
                 ScoreTableCell(text: "Toplam", isDetector: isDetector),
                 for (int j = 0; j < 6; j++)
